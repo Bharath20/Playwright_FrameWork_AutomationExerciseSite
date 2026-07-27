@@ -3,7 +3,6 @@ import { BasePage } from "./BasePage";
 import { WaitUtils } from "../utils/WaitUtils";
 
 
-
 export class HomePage extends BasePage {
   
   readonly signUpOrLoginButtonLocator: Locator;
