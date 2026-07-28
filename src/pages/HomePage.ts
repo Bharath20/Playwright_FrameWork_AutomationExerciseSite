@@ -25,10 +25,14 @@ export class HomePage extends BasePage {
 
 async navigate() {
     console.log("Navigating...");
-    await this.page.goto('https://automationexercise.com/',{
-        waitUntil: 'domcontentloaded',
-        timeout: 60000
-    });
+     await this.page.goto("https://automationexercise.com/");
+    // await this.page.goto('https://automationexercise.com/',{
+    //     waitUntil: 'domcontentloaded',
+    //     timeout: 60000
+    // });
+    // await this.page.screenshot({
+    //     path: 'screenshots/HomePage.png'
+    // });
     await expect(this.page).toHaveURL('https://automationexercise.com/');
     console.log(await this.page.url());
 }
