@@ -4,7 +4,8 @@ export class LoginData {
     public static getLoginDetails(): Login {
         return {
             email: "Test2255@gmail.com",
-            password: "Password@123"
+            password: "Password@123",
+            username: "Test2255"
         };
     };
 
