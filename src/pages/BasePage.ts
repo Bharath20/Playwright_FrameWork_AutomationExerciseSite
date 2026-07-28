@@ -57,14 +57,20 @@ export class BasePage {
 
 
     // Verify text
-    async verifyText(locator: Locator, expectedText: string): Promise<void> {
+    // async verifyText(locator: Locator, expectedText: string): Promise<void> {
 
-        await this.closeAdvertisementIfPresent();
+    //     await this.closeAdvertisementIfPresent();
 
-        await expect(locator)
-            .toHaveText(expectedText);
+    //     await expect(locator)
+    //         .toHaveText(expectedText);
 
-    }
+    // }
+
+    async verifyText(locator: Locator,expectedText: string, message?: string): Promise<void> {
+
+     await this.closeAdvertisementIfPresent();
+     await expect(locator,message).toContainText(expectedText);
+   }
 
 
     // Check whether an element is visible

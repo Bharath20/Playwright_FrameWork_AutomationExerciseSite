@@ -10,25 +10,24 @@ export class HomePage extends BasePage {
   readonly passwordInputLocator: Locator;
   readonly loginBtnLocator: Locator;
   readonly adCloseButtonLocator: Locator;
+  readonly loggedInUserLocator : Locator
 
   constructor(page: Page) {
     super(page);
-    this.page = page;
+    //this.page = page;
     this.signUpOrLoginButtonLocator = page.getByText("Signup / Login")
     this.emailAddressInputLocator = page.locator("//input[@data-qa='login-email']");
     this.passwordInputLocator = page.locator("//input[@data-qa='login-password']");
     this.loginBtnLocator = page.locator("//button[@data-qa='login-button']");    
     this.adCloseButtonLocator = page.getByText("Close");
+    this.loggedInUserLocator =page.locator("//a[contains(.,'Logged in as')]");
   }
 
 
 
 async navigate() {
     console.log("Navigating...");
-    await this.page.goto('https://automationexercise.com/',{
-        waitUntil: 'domcontentloaded',
-        timeout: 60000
-    });
+     await this.page.goto("https://automationexercise.com/");
     await expect(this.page).toHaveURL('https://automationexercise.com/');
     console.log(await this.page.url());
 }
@@ -48,6 +47,14 @@ async closeAdvertisement() {
     await this.click(this.loginBtnLocator);
   }
 
+   async verifyLoggedInUser(expectedUsername:string) {
+
+        await this.verifyText(this.loggedInUserLocator, " Logged in as"+ expectedUsername,
+        "Logged in username is not displayed correctly"
+        );
+        console.log(" Logged in as "+expectedUsername);
+
+      }
   
 
 }
