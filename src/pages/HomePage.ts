@@ -10,8 +10,8 @@ export class HomePage extends BasePage {
   readonly passwordInputLocator: Locator;
   readonly loginBtnLocator: Locator;
   readonly adCloseButtonLocator: Locator;
-  readonly loggedInUserLocator : Locator
-
+  readonly loggedInUserLocator : Locator;
+  readonly clickTestcaseButton: Locator;
   constructor(page: Page) {
     super(page);
     //this.page = page;
@@ -21,9 +21,9 @@ export class HomePage extends BasePage {
     this.loginBtnLocator = page.locator("//button[@data-qa='login-button']");    
     this.adCloseButtonLocator = page.getByText("Close");
     this.loggedInUserLocator =page.locator("//a[contains(.,'Logged in as')]");
+    this.clickTestcaseButton = page.locator("(//button[text()='Test Cases'])[1]");
+   
   }
-
-
 
 async navigate() {
     console.log("Navigating...");
@@ -55,6 +55,12 @@ async closeAdvertisement() {
         console.log(" Logged in as "+expectedUsername);
 
       }
+
+      async VerifyclickTestcaseButton(){
+      await this.click(this.clickTestcaseButton);
+
+    }
+
   
 
 }

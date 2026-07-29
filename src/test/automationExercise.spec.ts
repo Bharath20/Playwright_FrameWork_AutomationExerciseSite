@@ -1,5 +1,6 @@
 //import { test } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
+import { TestcasesPage } from "../pages/TestcasesPage";
 import {Login} from "../models/login";
 import { LoginData } from "../data/loginData";
 import { test, expect } from '@playwright/test';
@@ -26,7 +27,6 @@ import { ProductsPage } from "../pages/ProductsPage";
 
   });
 
-
     test("TCO8_Verify All Products and product detail page", async ({page}) => {
     const homePage = new HomePage(page);
     const productsPage = new ProductsPage(page);
@@ -35,4 +35,20 @@ import { ProductsPage } from "../pages/ProductsPage";
     await homePage.closeAdvertisement();
     await productsPage.openProductsPage();
 
-    });
+  });
+
+  test("TC07_Verify Test Cases Page", async({page}) => {
+    const homePage = new HomePage(page);
+    const testCasesPage = new TestcasesPage(page);
+
+    await homePage.navigate();
+    await homePage.closeAdvertisement();
+    await homePage.VerifyclickTestcaseButton();
+    
+  
+    await testCasesPage.verifytestcasePageUrlisloaded();
+    await testCasesPage.verifyTestCasesAreListed();
+
+      });
+
+
