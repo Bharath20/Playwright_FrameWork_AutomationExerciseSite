@@ -6,25 +6,23 @@ import { WaitUtils } from "../utils/WaitUtils";
 export class HomePage extends BasePage {
   
   readonly signUpOrLoginButtonLocator: Locator;
-  readonly contactUsButtonLocator: Locator;
   readonly emailAddressInputLocator: Locator;
   readonly passwordInputLocator: Locator;
   readonly loginBtnLocator: Locator;
   readonly adCloseButtonLocator: Locator;
   readonly loggedInUserLocator : Locator;
   readonly clickTestcaseButton: Locator;
-  readonly homePageVisibleLocator: Locator;
   constructor(page: Page) {
     super(page);
+    //this.page = page;
     this.signUpOrLoginButtonLocator = page.getByText("Signup / Login")
-    this.contactUsButtonLocator = page.locator("a[href='/contact_us'], a:has-text('Contact Us'), a:has-text('Contact us')");
     this.emailAddressInputLocator = page.locator("//input[@data-qa='login-email']");
     this.passwordInputLocator = page.locator("//input[@data-qa='login-password']");
     this.loginBtnLocator = page.locator("//button[@data-qa='login-button']");    
     this.adCloseButtonLocator = page.getByText("Close");
     this.loggedInUserLocator =page.locator("//a[contains(.,'Logged in as')]");
     this.clickTestcaseButton = page.locator("(//button[text()='Test Cases'])[1]");
-    this.homePageVisibleLocator = page.locator("//img[@alt='Website for automation practice']");
+   
   }
 
 async navigate() {
@@ -47,15 +45,6 @@ async closeAdvertisement() {
     await this.fill(this.emailAddressInputLocator,email);
     await this.fill(this.passwordInputLocator, password);
     await this.click(this.loginBtnLocator);
-  }
-
-  async clickContactUs(): Promise<void> {
-    await this.click(this.contactUsButtonLocator);
-  }
-
-  async verifyHomePageVisible(): Promise<void> {
-    await WaitUtils.waitForVisible(this.homePageVisibleLocator);
-    await expect(this.homePageVisibleLocator).toBeVisible();
   }
 
    async verifyLoggedInUser(expectedUsername:string) {
