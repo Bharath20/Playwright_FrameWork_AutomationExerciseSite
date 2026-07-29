@@ -1,46 +1,34 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  // Look for test files in the "tests" directory, relative to this configuration file.
-  testDir: './src/test',
-   /* Maximum time one test can run for. */
-   timeout: 30 * 1000,
 
-  // Run all tests in parallel.
+  testDir: './src/test',
+
+  timeout: 30 * 1000,
+
   fullyParallel: false,
 
-  // Fail the build on CI if you accidentally left test.only in the source code.
-  forbidOnly: !!process.env.CI,
+  retries: 2,   // Retry enable
 
-  // Retry on CI only.
-  //retries: process.env.CI ? 2 : 0,
-
-  retries: 1,
-
-  // Opt out of parallel tests on CI.
-  workers: process.env.CI ? 1 : undefined,
-
-  // Reporter to use
-  reporter: 'html',
+  reporter: [
+    ['html', { outputFolder: 'playwright-report', open: 'always' }]
+  ],
 
   use: {
-    // Base URL
-    baseURL: 'https://automationexercise.com/',
     headless: false,
-    // Screenshot on failure
+
     screenshot: 'only-on-failure',
 
-    // Video on failure
     video: 'retain-on-failure',
 
-    // Trace
-    trace: 'on-first-retry',
-},
-  // Configure projects for major browsers.
+    trace: 'retain-on-failure'
+  },
+
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
+      use: { ...devices['Desktop Chrome'] }
+    }
   ]
+
 });
