@@ -59,7 +59,7 @@ test("TCO9_Search Product", async ({ page }) => {
 // 8. Verify all the products related to search are visible
     await productsPage.searchProduct("Blue Top");
     await productsPage.verifySearchedProductsVisible();
-    await productsPage.verifySearchResults("Blue Top");
+    await productsPage.verifySearchResults();
   
 });
     
