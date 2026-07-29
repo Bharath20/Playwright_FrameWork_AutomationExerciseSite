@@ -2,6 +2,8 @@ import { test } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
 import {Login} from "../models/login";
 import { LoginData } from "../data/loginData";
+import { ProductsPage } from "../pages/ProductsPage";
+
 
 
   test("TCO1_Register User", async ({page}) => {
@@ -41,3 +43,13 @@ import { LoginData } from "../data/loginData";
     await homePage.verifyLoggedInUser(loginData.username);
 
   });
+
+    test("TCO8_Verify All Products and product detail page", async ({page}) => {
+    const homePage = new HomePage(page);
+    const productsPage = new ProductsPage(page);
+
+    await homePage.navigate();
+    await homePage.closeAdvertisement();
+    await productsPage.openProductsPage();
+
+    });
