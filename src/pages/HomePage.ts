@@ -56,7 +56,10 @@ async closeAdvertisement() {
 
       }
 
-      
+      async VerifyclickTestcaseButton(){
+      await this.click(this.clickTestcaseButton);
+
+    }
 
   
 
