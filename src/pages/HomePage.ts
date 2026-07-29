@@ -49,7 +49,7 @@ async closeAdvertisement() {
 
    async verifyLoggedInUser(expectedUsername:string) {
 
-        await this.verifyText(this.loggedInUserLocator, " Logged in as"+ expectedUsername,
+        await this.verifyText(this.loggedInUserLocator, " Logged in as "+ expectedUsername,
         "Logged in username is not displayed correctly"
         );
         console.log(" Logged in as "+expectedUsername);
