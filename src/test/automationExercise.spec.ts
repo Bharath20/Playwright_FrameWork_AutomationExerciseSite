@@ -7,6 +7,7 @@ import { LoginData } from "../data/loginData";
 import { ProductsPage } from "../pages/ProductsPage";
 import { Login, TestData } from "../models/login";
 import { BasePage } from "../pages/BasePage";
+import { CartPage } from "../pages/CartPage";
 
 /*
  * Test Case ID : TCO1
@@ -84,4 +85,93 @@ test("TC07_Verify Test Cases Page", async ({ page }) => {
   await testCasesPage.verifytestcasePageUrlisloaded();
   await testCasesPage.verifyTestCasesAreListed();
 });
+
+
+
+  /*
+ * Test Case ID : TCO2 
+ * Test Summary : Verify that a new user with correct username and password can login successfully.
+ * Module       : Login
+ * Author       : Sooraj 
+ */
+  test("TCO2_Login User with correct email and password", async ({page}) => {
+    const homePage = new HomePage(page);
+    const basePage=new BasePage(page);
+    const testData:TestData=LoginData.TC02_getTestDataForUserCreation();
+
+
+    //1. Launch browser
+    //2. Navigate to url 'http://automationexercise.com'
+    await homePage.navigate();
+    await homePage.closeAdvertisement();
+
+    //3. Verify that home page is visible successfully
+    await expect(page,"Home Page is not displayed").toHaveTitle('Automation Exercise');
+
+    //Creating a new user and with the created user login functionility will be verified
+    await homePage.signUp(testData.name, testData.email);
+    await homePage.accountInformationCreation(testData.password,testData.dayValue,testData.monthValue,testData.yearValue);
+    await homePage.addressInformationCreation(testData.firstName,testData.lastName,testData.address,testData.countryValue,testData.state,testData.city,testData.zipcode,testData.mobile);
+    await basePage.click(homePage.signUpContinueBtnLocator);
+    await basePage.click(homePage.logoutButtonLocator);
+
+    //4. Click on 'Signup / Login' button
+    await basePage.click(homePage.signUpOrLoginButtonLocator);
+
+    //5. Verify 'Login to your account' is visible
+    await expect(page.locator('h2').first(),"Login to your account heading is not displayed").toHaveText('Login to your account');
+
+    //6. Enter correct email address and password
+    //7. Click 'login' button
+    await homePage.login(testData.email,testData.password);
+
+    //8. Verify that 'Logged in as username' is visible
+    await homePage.verifyLoggedInUser(testData.name);
+
+    //9. Click 'Delete Account' button
+    await homePage.deleteAccount();
+
+    //10. Verify that 'ACCOUNT DELETED!' is visible
+    await expect(page.locator('h2').first(),"Account Deleted! message not displayed").toHaveText('Account Deleted!');
+
+  });
+
+  /*
+ * Test Case ID : TC11
+ * Test Summary : Verify Subscription in Cart page
+ * Module       : Cart
+ * Author       : Sooraj 
+ */
+  test("TC11_Verify Subscription in Cart page", async ({page}) => {
+    const loginData: Login = LoginData.getLoginDetails();
+    const homePage = new HomePage(page);
+    const basePage=new BasePage(page);
+    const cartPage=new CartPage(page);
+
+
+    //1. Launch browser
+    //2. Navigate to url 'http://automationexercise.com'
+    await homePage.navigate();
+    await homePage.closeAdvertisement();
+
+    //3. Verify that home page is visible successfully
+    await expect(page,"Home Page is not displayed").toHaveTitle('Automation Exercise');
+    await homePage.login(loginData.email,loginData.password);
+
+    //4. Click 'Cart' button
+    //5. Scroll down to footer
+    await basePage.click(cartPage.cartButtonLocator);
+
+    //6. Verify text 'SUBSCRIPTION'
+    await expect(page.locator('h2').first(),"Text 'Subscription' not displayed").toHaveText('Subscription');
+
+    //7. Enter email address in input and click arrow button
+    await basePage.fill(cartPage.emailAddressSubscribeInputLocator,loginData.email);
+    await basePage.click(cartPage.subscribeButtonLocator);
+
+    //8. Verify success message 'You have been successfully subscribed!' is visible
+    //await expect(page.locator(cartPage.successMessageLocator),"success message not displayed").toHaveText("You have been successfully subscribed!");
+    await basePage.waitForElement(cartPage.successMessageLocator);
+    await basePage.verifyText(cartPage.successMessageLocator,"You have been successfully subscribed!","'You have been successfully subscribed!success' message not displayed");
+  });
 
