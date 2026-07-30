@@ -34,8 +34,6 @@ export class HomePage extends BasePage {
   readonly signUpCreateBtnLocator: Locator;
   readonly signUpContinueBtnLocator: Locator;
   readonly deleteButtonLocator: Locator;
-  readonly homePageLogoutLocator: Locator;
-  readonly LabelBacktoLoginlocator: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -69,9 +67,9 @@ export class HomePage extends BasePage {
     this.signUpMobileNumberInputLocator = page.locator("#mobile_number");
     this.signUpCreateBtnLocator = page.locator("//button[@data-qa='create-account']");
     this.signUpContinueBtnLocator = page.locator("//a[@data-qa='continue-button']");
-    this.deleteButtonLocator = page.getByText("Delete Account");
-    this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
-    this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
+    this.deleteButtonLocator = page.getByText(" Delete Account");
+    this.logoutButtonLocator = page.getByText(" Logout")
+    
   }
 
   async navigate() {
@@ -92,11 +90,15 @@ export class HomePage extends BasePage {
     await this.fill(this.passwordInputLocator, password);
     await this.click(this.loginBtnLocator);
   }
-
+  /*Summary: This method clicks on the "Contact Us" button to navigate to the Contact Us page.
+     * Author       : Abhishek
+     */
   async clickContactUs(): Promise<void> {
     await this.click(this.contactUsButtonLocator);
   }
-
+  /*Summary: This method verifies that the home page is visible.
+    * Author       : Abhishek
+    */
   async verifyHomePageVisible(): Promise<void> {
     await WaitUtils.waitForVisible(this.homePageVisibleLocator);
     await expect(this.homePageVisibleLocator).toBeVisible();
@@ -109,14 +111,21 @@ export class HomePage extends BasePage {
     console.log(" Logged in as " + expectedUsername);
   }
 
+  /*
+      * Summary: * This method is used to verify home page is loaded.
+      *  Author       : Stimna 
+  */
   async verifyHomePageLoaded() {
     await expect(this.page).toHaveTitle("Automation Exercise");
   }
-
+   /*
+      * Summary: * This method is used to Click on the Products tab
+      *  Author       : Stimna 
+  */
   async clickProducts() {
     await this.click(this.productsButtonLocator);
   }
-
+  
   /* Summary: * This method is used to click on the testcase button.
    * Author       : Dixy Salin
    */
@@ -137,7 +146,7 @@ export class HomePage extends BasePage {
     await this.click(this.signUpBtnLocator);
   }
 
-  /* 
+   /* 
    * Summary: * This method is used for filling account information.
    * @param password - password of the user.
    * @param dayValue - dayValue of the user. 
@@ -153,6 +162,31 @@ export class HomePage extends BasePage {
     await this.yearSelectLocator.selectOption(yearValue);
     await this.click(this.newsLetterCheckSelectLocator);
     await this.click(this.receiveOffersCheckSelectLocator);
+  }
+
+  /* 
+  * Summary: * This method is used for filling address information of the user.
+  * @param firstName - firstName of the user.
+  * @param lastName - lastName of the user. 
+  * @param address - address of the user.
+  * @param countryValue - country of the user.
+  * @param state - state of the user. 
+  * @param city - city of the user.
+  * @param zipcode - zipcode of address of the user.
+  * @param mobile - mobile number of the user.
+  * Author       : Sooraj 
+  */
+  async addressInformationCreation(firstName: string, lastName: string, address: string, countryValue: string, state: string, city: string, zipcode: string, mobile: string) {
+    await this.fill(this.signUpFirstNameInputLocator, firstName);
+    await this.fill(this.signUpLastNameInputLocator, lastName);
+    await this.fill(this.signUpAddressInputLocator, address);
+    await this.countrySelectLocator.selectOption(countryValue);
+    await this.fill(this.signUpStateInputLocator, state);
+    await this.fill(this.signUpCityInputLocator, city);
+    await this.fill(this.signUpZipcodeInputLocator, zipcode);
+    await this.fill(this.signUpMobileNumberInputLocator, mobile);
+    await this.click(this.signUpCreateBtnLocator);
+
   }
 
   /* 
@@ -203,5 +237,4 @@ export class HomePage extends BasePage {
     await this.verifyText(this.LabelBacktoLoginlocator, "Login to your account",
       "User is successfully returns to login page");
   }
-
 }
