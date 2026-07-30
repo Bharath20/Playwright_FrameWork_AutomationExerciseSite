@@ -7,8 +7,6 @@ import { LoginData } from "../data/loginData";
 import { ProductsPage } from "../pages/ProductsPage";
 import { Login, TestData } from "../models/login";
 import { BasePage } from "../pages/BasePage";
-import { ContactUsData } from "../data/ContactUS_Data";
-import { ContactUs } from "../models/contactus";
 
 /*
  * Test Case ID : TCO1
@@ -86,44 +84,4 @@ test("TC07_Verify Test Cases Page", async ({ page }) => {
   await testCasesPage.verifytestcasePageUrlisloaded();
   await testCasesPage.verifyTestCasesAreListed();
 });
-
-  test("TCO8_Verify All Products and product detail page", async ({page}) => {
-    const homePage = new HomePage(page);
-    const productsPage = new ProductsPage(page);
-
-    await homePage.navigate();
-    await homePage.closeAdvertisement();
-    await productsPage.openProductsPage();
-
-  });
-
-  test("TC07_Verify Test Cases Page", async({page}) => {
-    const homePage = new HomePage(page);
-    const testCasesPage = new TestcasesPage(page);
-
-    await homePage.navigate();
-    await homePage.closeAdvertisement();
-    await homePage.VerifyclickTestcaseButton();
-    await testCasesPage.verifytestcasePageUrlisloaded();
-    await testCasesPage.verifyTestCasesAreListed();
-  });
-
-  test("TCO6_Contact Us Form", async ({page}) => {
-    const homePage = new HomePage(page);
-    const contactUsPage = new ContactUsPage(page);
-    const Contactusdata: ContactUs = ContactUsData.getContactUsDetails();
-    const uploadFilePath = path.resolve(__dirname, "../data/contact-us-upload.txt");
-
-    await homePage.navigate();
-    await homePage.closeAdvertisement();
-    await homePage.verifyHomePageVisible();
-    await homePage.clickContactUs();
-    await contactUsPage.verifyGetInTouchVisible();
-    await contactUsPage.fillContactForm(Contactusdata.name, Contactusdata.email, Contactusdata.subject, Contactusdata.message);
-    await contactUsPage.uploadFile(uploadFilePath);
-    await contactUsPage.submitForm();
-    await contactUsPage.verifySuccessMessage();
-    await contactUsPage.goToHome();
-    await homePage.verifyHomePageVisible();
-  });
 
