@@ -97,8 +97,14 @@ test("TCO9_Search Product", async ({ page }) => {
     await productsPage.verifySearchedProductsVisible();
     await productsPage.verifySearchResults();
   
-});       
+}); 
 
+/*
+ * Test Case ID : TCO7
+ * Test Summary : Verify that Test Cases Page is loaded successfully.
+ * Module       : Page Navigation
+ * Author       : Dixy 
+ */
   test("TC07_Verify Test Cases Page", async({page}) => {
     const homePage = new HomePage(page);
     const testCasesPage = new TestcasesPage(page);
@@ -133,6 +139,12 @@ test("TCO9_Search Product", async ({ page }) => {
     await homePage.verifyHomePageVisible();
   });
 
+  /*
+ * Test Case ID : TCO4
+ * Test Summary : Verify that user can logout successfully.
+ * Module       : User Logout
+ * Author       : Dixy 
+ */
   test("TC04_Logout User", async ({page}) => {
     const homePage = new HomePage(page);
     const loginData: Login = LoginData.getLoginDetails();
