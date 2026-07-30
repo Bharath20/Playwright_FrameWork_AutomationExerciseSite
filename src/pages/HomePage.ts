@@ -118,6 +118,11 @@ async closeAdvertisement() {
 
     }
 
+    /* Summary: * This method is used to sign Up.
+    * @param name - name of the user.
+    * @param email - email of the user. 
+    * Author       : Sooraj 
+    */
     async signUp(name: string, email: string) {
       await WaitUtils.waitForVisible(this.signUpOrLoginButtonLocator);
       await this.click(this.signUpOrLoginButtonLocator);
@@ -127,6 +132,14 @@ async closeAdvertisement() {
 
     }
 
+    /* 
+    * Summary: * This method is used for filling account information.
+    * @param password - password of the user.
+    * @param dayValue - dayValue of the user. 
+    * @param monthValue - monthValue of the user.
+    * @param yearValue - yearValue of the user.
+    * Author       : Sooraj 
+    */
     async accountInformationCreation(password:string,dayValue:string,monthValue:string,yearValue:string){
       await this.click(this.mrRadioBtnLocator);
       await this.fill(this.signUpPasswordInputLocator,password);
@@ -137,6 +150,18 @@ async closeAdvertisement() {
       await this.click(this.receiveOffersCheckSelectLocator);
     }
 
+    /* 
+    * Summary: * This method is used for filling address information of the user.
+    * @param firstName - firstName of the user.
+    * @param lastName - lastName of the user. 
+    * @param address - address of the user.
+    * @param countryValue - country of the user.
+    * @param state - state of the user. 
+    * @param city - city of the user.
+    * @param zipcode - zipcode of address of the user.
+    * @param mobile - mobile number of the user.
+    * Author       : Sooraj 
+    */
     async addressInformationCreation(firstName:string,lastName:string,address:string,countryValue:string,state:string,city:string,zipcode:string,mobile:string){
       await this.fill(this.signUpFirstNameInputLocator,firstName);
       await this.fill(this.signUpLastNameInputLocator,lastName);
@@ -150,6 +175,10 @@ async closeAdvertisement() {
 
     }
 
+    /* 
+    * Summary: * This method is used Delete the account of the user
+    * Author       : Sooraj 
+    */
     async deleteAccount(){
       await this.click(this.deleteButtonLocator);
 

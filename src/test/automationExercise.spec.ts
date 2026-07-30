@@ -6,13 +6,17 @@ import { ContactUsPage } from "../pages/ContactUsPage";
 import { LoginData } from "../data/loginData";
 import { ProductsPage } from "../pages/ProductsPage";
 import {Login, TestData} from "../models/login";
-import { test, expect } from '@playwright/test';
 import { BasePage } from "../pages/BasePage";
 
-
+/*
+ * Test Case ID : TCO1 
+ * Test Summary : Verify that a new user can register successfully.
+ * Module       : Registration
+ * Author       : Sooraj 
+ */
   test("TCO1_Register User", async ({page}) => {
     const loginData: Login = LoginData.getLoginDetails();
-    const testData:TestData=LoginData.getTestDataForSignUp();
+    const testData:TestData=LoginData.TC01_getTestDataForSignUp();
     const homePage = new HomePage(page);
     const basePage=new BasePage(page);
      
