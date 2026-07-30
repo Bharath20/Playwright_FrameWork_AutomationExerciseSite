@@ -72,3 +72,21 @@ import { ProductsPage } from "../pages/ProductsPage";
     await homePage.verifyHomePageVisible();
   });
 
+  test("TC04_Logout User", async ({page}) => {
+    const homePage = new HomePage(page);
+    const loginData: Login = LoginData.getLoginDetails();
+
+    await homePage.navigate();
+    await homePage.closeAdvertisement();
+
+    await homePage.login(loginData.email, loginData.password);
+    //Verify the user is logged in successfully
+    await homePage.verifyLoggedInUser(loginData.username); 
+
+    //click on logout button 
+    await homePage.ClickLogoutButton();
+    //Verify user is navigated to the login page after logout
+    await homePage.VerifyUserReturnsToHompage();
+
+  });
+
