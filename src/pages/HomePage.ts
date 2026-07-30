@@ -34,6 +34,10 @@ export class HomePage extends BasePage {
   readonly signUpCreateBtnLocator: Locator;
   readonly signUpContinueBtnLocator: Locator;
   readonly deleteButtonLocator: Locator;
+  readonly logoutButtonLocator: Locator;
+  readonly homePageLogoutLocator: Locator;
+  readonly LabelBacktoLoginlocator: Locator;
+
 
   constructor(page: Page) {
     super(page);
@@ -68,7 +72,10 @@ export class HomePage extends BasePage {
     this.signUpCreateBtnLocator = page.locator("//button[@data-qa='create-account']");
     this.signUpContinueBtnLocator = page.locator("//a[@data-qa='continue-button']");
     this.deleteButtonLocator = page.getByText(" Delete Account");
-    this.logoutButtonLocator = page.getByText(" Logout")
+    this.logoutButtonLocator = page.getByText(" Logout");
+    this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
+    this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
+
     
   }
 
@@ -187,30 +194,6 @@ export class HomePage extends BasePage {
     await this.fill(this.signUpMobileNumberInputLocator, mobile);
     await this.click(this.signUpCreateBtnLocator);
 
-  }
-
-  /* 
-   * Summary: * This method is used for filling address information of the user.
-   * @param firstName - firstName of the user.
-   * @param lastName - lastName of the user. 
-   * @param address - address of the user.
-   * @param countryValue - country of the user.
-   * @param state - state of the user. 
-   * @param city - city of the user.
-   * @param zipcode - zipcode of address of the user.
-   * @param mobile - mobile number of the user.
-   * Author       : Sooraj 
-   */
-  async addressInformationCreation(firstName: string, lastName: string, address: string, countryValue: string, state: string, city: string, zipcode: string, mobile: string) {
-    await this.fill(this.signUpFirstNameInputLocator, firstName);
-    await this.fill(this.signUpLastNameInputLocator, lastName);
-    await this.fill(this.signUpAddressInputLocator, address);
-    await this.countrySelectLocator.selectOption(countryValue);
-    await this.fill(this.signUpStateInputLocator, state);
-    await this.fill(this.signUpCityInputLocator, city);
-    await this.fill(this.signUpZipcodeInputLocator, zipcode);
-    await this.fill(this.signUpMobileNumberInputLocator, mobile);
-    await this.click(this.signUpCreateBtnLocator);
   }
 
   /* 
