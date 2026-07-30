@@ -23,7 +23,7 @@ export class HomePage extends BasePage {
     this.loginBtnLocator = page.locator("//button[@data-qa='login-button']");    
     this.adCloseButtonLocator = page.getByText("Close");
     this.loggedInUserLocator =page.locator("//a[contains(.,'Logged in as')]");
-    this.clickTestcaseButton = page.locator("//a[contains(normalize-space(.), 'Test Cases')]");
+    this.clickTestcaseButton = page.locator("//a[contains(text(),' Test Cases')]");
     this.homePageVisibleLocator = page.locator("//img[@alt='Website for automation practice']");
   }
 
@@ -69,9 +69,8 @@ async closeAdvertisement() {
 
       //Click on the testcase button
       async VerifyclickTestcaseButton(){
-      await WaitUtils.waitForVisible(this.clickTestcaseButton);
       await this.click(this.clickTestcaseButton);
     }
-    
+
 
 }
