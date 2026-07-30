@@ -14,12 +14,12 @@ constructor(page:Page){
 }
 
  async verifytestcasePageUrlisloaded(): Promise<void> {
-    await expect(this.page).toHaveURL("https://automationexercise.com/test_cases");
+    await expect(this.page, " Testcase page URL is loaded").toHaveURL("https://automationexercise.com/test_cases");
   }
 
 async verifyTestCasesAreListed(): Promise<void> {
-    await expect(this.VerifyTestcasepageLocator.isVisible());
-    await expect(this.firsttestcaseLinkLocator.isVisible());
+    await expect(this.VerifyTestcasepageLocator.isVisible(), "Testcase list is displayed below");
+    await expect(this.firsttestcaseLinkLocator.isVisible(), "First Testcase is visible");
   }
 
 }
