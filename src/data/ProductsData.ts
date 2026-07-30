@@ -2,7 +2,7 @@ import { Product } from "../models/product";
 
 export class ProductsData {
 
-    static getProductDetails(): Product {
+    static TC09_getProductDetails(): Product {
         return {
             productName: "Blue Top"
         };

@@ -15,7 +15,7 @@ test("TCO9_Search Product", async ({ page }) => {
 
     const homePage = new HomePage(page);
     const productsPage = new ProductsPage(page);
-    const productData = ProductsData.getProductDetails();
+    const productData = ProductsData.TC09_getProductDetails();
 
     // 1. Launch browser
     // 2. Navigate to url 'http://automationexercise.com'
