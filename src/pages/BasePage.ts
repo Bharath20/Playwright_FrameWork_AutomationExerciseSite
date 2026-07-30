@@ -149,5 +149,9 @@ export class BasePage {
         await locator.uncheck();
 
     }
+    
+    async verifyVisible(locator: Locator, errorMessage: string) {
+    await expect(locator, errorMessage).toBeVisible();
+}
 
 }
