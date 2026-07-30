@@ -26,24 +26,35 @@ export class ProductsPage extends BasePage {
     async openProductsPage(): Promise<void> {
         await this.click(this.productsButtonLocator);
     }
-
-
+    /*
+     * Summary: * This method is used to verify that all products are listed.
+     *  Author       : Stimna 
+     */
     async verifyAllProductsPage() {
         await expect(this.allProductsLocator).toBeVisible();
     }
 
-
+    /*
+      * Summary: * This method is used to search a product.
+     *  Author       : Stimna 
+     */
     async searchProduct(productName: string) {
         await this.fill(this.searchInputLocator, productName);
         await this.click(this.searchButtonLocator);
     }
 
-
+    /*
+     * Summary: * This method is used to verify the product searched is visible.
+     *  Author       : Stimna 
+     */
     async verifySearchedProductsVisible() {
         await expect(this.searchedProductsLocator).toBeVisible();
     }
 
-
+    /*
+     * Summary: * This method is used to verify the search result contain no products other than the searched one.
+     *  Author       : Stimna 
+     */
     async verifySearchResults() {
 
         const count = await this.productNamesLocator.count();
