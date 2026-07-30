@@ -13,8 +13,6 @@ export class HomePage extends BasePage {
   readonly adCloseButtonLocator: Locator;
   readonly loggedInUserLocator: Locator;
   readonly productsButtonLocator: Locator;
-
-
   readonly clickTestcaseButton: Locator;
   readonly homePageVisibleLocator: Locator;
   readonly signUpNameInputLocator: Locator;
@@ -99,11 +97,15 @@ export class HomePage extends BasePage {
     await this.fill(this.passwordInputLocator, password);
     await this.click(this.loginBtnLocator);
   }
-
+  /*Summary: This method clicks on the "Contact Us" button to navigate to the Contact Us page.
+     * Author       : Abhishek
+     */
   async clickContactUs(): Promise<void> {
     await this.click(this.contactUsButtonLocator);
   }
-
+  /*Summary: This method verifies that the home page is visible.
+    * Author       : Abhishek
+    */
   async verifyHomePageVisible(): Promise<void> {
     await WaitUtils.waitForVisible(this.homePageVisibleLocator);
     await expect(this.homePageVisibleLocator).toBeVisible();
@@ -204,7 +206,6 @@ export class HomePage extends BasePage {
     await this.click(this.deleteButtonLocator);
 
   }
-
 
 
 }
