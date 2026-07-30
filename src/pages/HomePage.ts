@@ -205,11 +205,5 @@ export class HomePage extends BasePage {
 
   }
 
-  async VerifyclickTestcaseButton() {
-    await this.click(this.clickTestcaseButton);
-
-  }
-
-
 
 }
