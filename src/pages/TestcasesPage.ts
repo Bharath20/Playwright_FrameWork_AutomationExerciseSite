@@ -16,15 +16,15 @@ export class TestcasesPage extends BasePage {
    * Author       : Dixy Salin
    */
   async verifytestcasePageUrlisloaded(): Promise<void> {
-    await expect(this.page, "Testcase page URL is loaded").toHaveURL("https://automationexercise.com/test_cases");
+    await expect(this.page, "Testcase page URL is not loaded").toHaveURL("https://automationexercise.com/test_cases");
   }
 
   /* Summary: * This method is used to verify the first testcase is listed.
    * Author       : Dixy Salin
    */
 async verifyTestCasesAreListed(): Promise<void> {
-    await expect(this.VerifyTestcasepageLocator.isVisible(), "Testcase list is displayed below");
-    await expect(this.firsttestcaseLinkLocator.isVisible(), "First Testcase is visible");
+    await expect(this.VerifyTestcasepageLocator.isVisible(), "Testcase list is not displayed in testcase page");
+    await expect(this.firsttestcaseLinkLocator.isVisible(), "First Testcase is not visible in testcase page");
   }
 
 }
