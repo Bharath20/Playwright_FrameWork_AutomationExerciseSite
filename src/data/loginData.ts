@@ -1,6 +1,7 @@
 import {Login,TestData} from "../models/login";
 
 export class LoginData {
+    //Common Data
     public static getLoginDetails(): Login {
         return {
             email: "Test2255@gmail.com",
@@ -10,7 +11,8 @@ export class LoginData {
     };
 
     
-    public static getTestDataForSignUp():TestData{
+    public static TC01_getTestDataForSignUp():TestData{
+
         return {
             name:"Test User",
             email:"testuserplaywright@gmail.com",
