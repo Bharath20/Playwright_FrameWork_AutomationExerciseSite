@@ -6,11 +6,14 @@ import { WaitUtils } from "../utils/WaitUtils";
 export class HomePage extends BasePage {
   
   readonly signUpOrLoginButtonLocator: Locator;
+  readonly contactUsButtonLocator: Locator;
   readonly emailAddressInputLocator: Locator;
   readonly passwordInputLocator: Locator;
   readonly loginBtnLocator: Locator;
   readonly adCloseButtonLocator: Locator;
   readonly loggedInUserLocator : Locator;
+  readonly clickTestcaseButton: Locator;
+  readonly homePageVisibleLocator: Locator;
   readonly signUpNameInputLocator : Locator;
   readonly signUpEmailInputLocator : Locator;
   readonly signUpBtnLocator: Locator;
@@ -33,15 +36,18 @@ export class HomePage extends BasePage {
   readonly signUpContinueBtnLocator: Locator;
   readonly deleteButtonLocator: Locator;
 
+
   constructor(page: Page) {
     super(page);
-    //this.page = page;
     this.signUpOrLoginButtonLocator = page.getByText("Signup / Login")
+    this.contactUsButtonLocator = page.locator("a[href='/contact_us'], a:has-text('Contact Us'), a:has-text('Contact us')");
     this.emailAddressInputLocator = page.locator("//input[@data-qa='login-email']");
     this.passwordInputLocator = page.locator("//input[@data-qa='login-password']");
     this.loginBtnLocator = page.locator("//button[@data-qa='login-button']");    
     this.adCloseButtonLocator = page.getByText("Close");
     this.loggedInUserLocator =page.locator("//a[contains(.,'Logged in as')]");
+    this.clickTestcaseButton = page.locator("(//button[text()='Test Cases'])[1]");
+    this.homePageVisibleLocator = page.locator("//img[@alt='Website for automation practice']");
     this.signUpNameInputLocator=page.locator("//input[@data-qa='signup-name']");
     this.signUpEmailInputLocator=page.locator("//input[@data-qa='signup-email']");
     this.signUpBtnLocator = page.locator("//button[@data-qa='signup-button']");
@@ -66,8 +72,6 @@ export class HomePage extends BasePage {
 
   }
 
-
-
 async navigate() {
     console.log("Navigating...");
      await this.page.goto("https://automationexercise.com/");
@@ -90,6 +94,15 @@ async closeAdvertisement() {
     await this.click(this.loginBtnLocator);
   }
 
+  async clickContactUs(): Promise<void> {
+    await this.click(this.contactUsButtonLocator);
+  }
+
+  async verifyHomePageVisible(): Promise<void> {
+    await WaitUtils.waitForVisible(this.homePageVisibleLocator);
+    await expect(this.homePageVisibleLocator).toBeVisible();
+  }
+
    async verifyLoggedInUser(expectedUsername:string) {
 
         await this.verifyText(this.loggedInUserLocator, " Logged in as "+ expectedUsername,
@@ -98,6 +111,12 @@ async closeAdvertisement() {
         console.log(" Logged in as "+expectedUsername);
 
       }
+
+
+      async VerifyclickTestcaseButton(){
+      await this.click(this.clickTestcaseButton);
+
+    }
 
     async signUp(name: string, email: string) {
       await WaitUtils.waitForVisible(this.signUpOrLoginButtonLocator);
@@ -135,6 +154,7 @@ async closeAdvertisement() {
       await this.click(this.deleteButtonLocator);
 
     }
+
   
 
 }
