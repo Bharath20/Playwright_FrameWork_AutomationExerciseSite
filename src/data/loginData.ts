@@ -1,4 +1,4 @@
-import {Login} from "../models/login";
+import {Login,TestData} from "../models/login";
 
 export class LoginData {
     public static getLoginDetails(): Login {
@@ -8,5 +8,26 @@ export class LoginData {
             username: "Test2255"
         };
     };
+
+    
+    public static getTestDataForSignUp():TestData{
+        return {
+            name:"Test User",
+            email:"testuserplaywright@gmail.com",
+            password:"Password@121212",
+            dayValue:"2",
+            monthValue:"March",
+            yearValue:"2010",
+            firstName:"Testfirstname",
+            lastName:"ln",
+            address:"test address",
+            countryValue:"India",
+            state:"Kerala",
+            city:"TVM",
+            zipcode:"695032",
+            mobile:"123456214"
+
+        }
+    }
 
 }
