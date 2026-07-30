@@ -6,6 +6,8 @@ import { ContactUsPage } from "../pages/ContactUsPage";
 import { Login } from "../models/login";
 import { LoginData } from "../data/loginData";
 import { ProductsPage } from "../pages/ProductsPage";
+import { ContactUsData } from "../data/ContactUS_Data";
+import { ContactUs } from "../models/contactus";
 
 
 
@@ -52,6 +54,7 @@ import { ProductsPage } from "../pages/ProductsPage";
   test("TCO6_Contact Us Form", async ({page}) => {
     const homePage = new HomePage(page);
     const contactUsPage = new ContactUsPage(page);
+    const Contactusdata: ContactUs = ContactUsData.getContactUsDetails();
     const uploadFilePath = path.resolve(__dirname, "../data/contact-us-upload.txt");
 
     await homePage.navigate();
@@ -59,12 +62,7 @@ import { ProductsPage } from "../pages/ProductsPage";
     await homePage.verifyHomePageVisible();
     await homePage.clickContactUs();
     await contactUsPage.verifyGetInTouchVisible();
-    await contactUsPage.fillContactForm(
-      "Test User1",
-      "test.user1@example.com",
-      "Automation Exercise",
-      "This is a Playwright contact form submission test"
-    );
+    await contactUsPage.fillContactForm(Contactusdata.name, Contactusdata.email, Contactusdata.subject, Contactusdata.message);
     await contactUsPage.uploadFile(uploadFilePath);
     await contactUsPage.submitForm();
     await contactUsPage.verifySuccessMessage();
