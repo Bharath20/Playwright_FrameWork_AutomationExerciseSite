@@ -12,6 +12,9 @@ export class HomePage extends BasePage {
   readonly loginBtnLocator: Locator;
   readonly adCloseButtonLocator: Locator;
   readonly loggedInUserLocator : Locator;
+  readonly productsButtonLocator: Locator;
+  
+
   readonly clickTestcaseButton: Locator;
   readonly homePageVisibleLocator: Locator;
   readonly signUpNameInputLocator : Locator;
@@ -46,6 +49,7 @@ export class HomePage extends BasePage {
     this.loginBtnLocator = page.locator("//button[@data-qa='login-button']");    
     this.adCloseButtonLocator = page.getByText("Close");
     this.loggedInUserLocator =page.locator("//a[contains(.,'Logged in as')]");
+    this.productsButtonLocator = page.locator("a[href='/products']");
     this.clickTestcaseButton = page.locator("(//button[text()='Test Cases'])[1]");
     this.homePageVisibleLocator = page.locator("//img[@alt='Website for automation practice']");
     this.signUpNameInputLocator=page.locator("//input[@data-qa='signup-name']");
@@ -112,6 +116,13 @@ async closeAdvertisement() {
 
       }
 
+  async verifyHomePageLoaded() {
+
+   await expect(this.page).toHaveTitle("Automation Exercise");
+}
+ async clickProducts() {
+    await this.click(this.productsButtonLocator);
+}
 
       async VerifyclickTestcaseButton(){
       await this.click(this.clickTestcaseButton);
