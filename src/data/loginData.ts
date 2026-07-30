@@ -36,7 +36,7 @@ export class LoginData {
 
         return {
             name:"TC02 TestUser",
-            email:"tc02testemail@gmail.com",
+            email:"tc02emailtest@gmail.com",
             password:"Password@121212",
             dayValue:"2",
             monthValue:"March",
