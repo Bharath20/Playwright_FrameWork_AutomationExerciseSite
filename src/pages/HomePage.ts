@@ -35,6 +35,7 @@ export class HomePage extends BasePage {
   readonly signUpCreateBtnLocator: Locator;
   readonly signUpContinueBtnLocator: Locator;
   readonly deleteButtonLocator: Locator;
+  readonly logoutButtonLocator: Locator;
 
 
   constructor(page: Page) {
@@ -69,6 +70,7 @@ export class HomePage extends BasePage {
     this.signUpCreateBtnLocator = page.locator("//button[@data-qa='create-account']");
     this.signUpContinueBtnLocator = page.locator("//a[@data-qa='continue-button']");
     this.deleteButtonLocator = page.getByText(" Delete Account");
+    this.logoutButtonLocator = page.getByText(" Logout")
 
   }
 
