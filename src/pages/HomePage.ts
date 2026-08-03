@@ -76,7 +76,7 @@ export class HomePage extends BasePage {
     this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
     this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
 
-    
+
   }
 
   async navigate() {
@@ -132,7 +132,7 @@ export class HomePage extends BasePage {
   async clickProducts() {
     await this.click(this.productsButtonLocator);
   }
-  
+
   /* Summary: * This method is used to click on the testcase button.
   * Author       : Dixy Salin
   */
@@ -152,14 +152,14 @@ export class HomePage extends BasePage {
     await this.click(this.signUpBtnLocator);
   }
 
-   /* 
-   * Summary: * This method is used for filling account information.
-   * @param password - password of the user.
-   * @param dayValue - dayValue of the user. 
-   * @param monthValue - monthValue of the user.
-   * @param yearValue - yearValue of the user.
-   * Author       : Sooraj 
-   */
+  /* 
+  * Summary: * This method is used for filling account information.
+  * @param password - password of the user.
+  * @param dayValue - dayValue of the user. 
+  * @param monthValue - monthValue of the user.
+  * @param yearValue - yearValue of the user.
+  * Author       : Sooraj 
+  */
   async accountInformationCreation(password: string, dayValue: string, monthValue: string, yearValue: string) {
     await this.click(this.mrRadioBtnLocator);
     await this.fill(this.signUpPasswordInputLocator, password);
@@ -202,7 +202,7 @@ export class HomePage extends BasePage {
   async deleteAccount() {
     await this.click(this.deleteButtonLocator);
   }
-  
+
   /* Summary: * This method is used to click on the Logout button.
   * Author       : Dixy Salin
   */
@@ -219,4 +219,19 @@ export class HomePage extends BasePage {
     await this.verifyText(this.LabelBacktoLoginlocator, "Login to your account",
       "User is successfully returns to login page");
   }
+
+  /* 
+    * Summary: * This method is used to verify the error message when user tries to login with incorrect email and password.
+    * @param email - email of the user.
+    * @param password - password of the user.
+    * Author       : Abhishek 
+    */
+
+  async emailOrPasswordIncorrect() {
+    await expect(
+      this.page.getByText('Your email or password is incorrect!')
+    ).toBeVisible();
+
+  }
+
 }
