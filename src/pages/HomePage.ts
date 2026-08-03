@@ -38,6 +38,11 @@ export class HomePage extends BasePage {
   readonly homePageLogoutLocator: Locator;
   readonly LabelBacktoLoginlocator: Locator;
   readonly emailAlreadyExistsError: Locator;
+  readonly subscriptionTitleLocator: Locator;
+  readonly subscriptionEmailLocator: Locator;
+  readonly subscribeButtonLocator: Locator;
+  readonly subscriptionSuccessMessageLocator: Locator;
+
 
 
 
@@ -78,6 +83,11 @@ export class HomePage extends BasePage {
     this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
     this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
     this.emailAlreadyExistsError = page.locator("//p[text()='Email Address already exist!']");
+    this.subscriptionTitleLocator = page.locator("//h2[text()='Subscription']");
+    this.subscriptionEmailLocator = page.locator("#susbscribe_email");
+    this.subscribeButtonLocator = page.locator("#subscribe");
+    this.subscriptionSuccessMessageLocator = page.locator("//div[@class='alert-success alert']");
+
 
   }
 
@@ -241,5 +251,51 @@ export class HomePage extends BasePage {
 
     await expect(this.emailAlreadyExistsError).toHaveText('Email Address already exist!');
 }
+
+  /*
+  * Summary:* Scrolls to the bottom of the Home page.
+  * Author       : Stimna
+  */
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  }
+
+
+  /*
+ * Summary:* Verifies the Subscription section is visible.
+ * Author       : Stimna
+ */
+  async verifySubscriptionSection(): Promise<void> {
+    await expect(this.subscriptionTitleLocator, "'SUBSCRIPTION' section is not visible in the Home Page").toBeVisible();
+  }
+
+  /**
+ * Summary:* Enters the email address in the subscription field.
+ * @param email : Email address to subscribe.
+ * Author       : Stimna
+ */
+  async enterSubscriptionEmail(email: string): Promise<void> {
+    await this.fill(this.subscriptionEmailLocator, email);
+  }
+/**
+   *Summary:* Clicks the Subscribe button.
+   * Author       : Stimna
+   */
+  async clickSubscribe(): Promise<void> {
+    await this.click(this.subscribeButtonLocator);
+  }
+  /**
+   * Summary:*Verifies the successful subscription message.
+   * Author       : Stimna
+   */
+  async verifySubscriptionSuccessMessage(): Promise<void> {
+    await expect(this.subscriptionSuccessMessageLocator, "Subscription success message is not displayed.").
+      toHaveText("You have been successfully subscribed!");
+  }
+
+
+
+
+
 
 }
