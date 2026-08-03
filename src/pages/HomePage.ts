@@ -37,6 +37,8 @@ export class HomePage extends BasePage {
   readonly logoutButtonLocator: Locator;
   readonly homePageLogoutLocator: Locator;
   readonly LabelBacktoLoginlocator: Locator;
+  readonly emailAlreadyExistsError: Locator;
+
 
 
   constructor(page: Page) {
@@ -75,7 +77,7 @@ export class HomePage extends BasePage {
     this.logoutButtonLocator = page.getByText(" Logout");
     this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
     this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
-
+    this.emailAlreadyExistsError = page.locator("//p[text()='Email Address already exist!']");
 
   }
 
@@ -233,5 +235,11 @@ export class HomePage extends BasePage {
     ).toBeVisible();
 
   }
+
+  async verifyEmailAlreadyExistsError(): Promise<void> {
+    await expect(this.emailAlreadyExistsError).toBeVisible();
+
+    await expect(this.emailAlreadyExistsError).toHaveText('Email Address already exist!');
+}
 
 }
