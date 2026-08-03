@@ -31,3 +31,23 @@ test("TC10_Verify Subscription in home page", async ({ page }) => {
 
 });
 
+test("TC25_Verify Scroll Up using Arrow button", async ({ page }) => {
+
+    const homePage = new HomePage(page);
+
+    // 1. Launch browser
+    // 2. Navigate to url 'http://automationexercise.com'
+    await homePage.navigate();
+    // 3. Verify that home page is visible successfully
+    await homePage.verifyHomePageLoaded();
+    // 4. Scroll down page to bottom
+    await homePage.scrollToBottom();
+    // 5. Verify 'SUBSCRIPTION' is visible
+    await homePage.verifySubscriptionSection();
+    // 6. Click on arrow at bottom right side to move upward
+    await homePage.clickScrollUpArrow();
+    //  7. Verify that page is scrolled up and full Fledged practice website for Automation Engineers text is visible on screen
+    await homePage.verifyScrolledToTop();
+
+});
+

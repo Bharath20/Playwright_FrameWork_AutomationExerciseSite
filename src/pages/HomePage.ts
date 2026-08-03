@@ -42,6 +42,8 @@ export class HomePage extends BasePage {
   readonly subscriptionEmailLocator: Locator;
   readonly subscribeButtonLocator: Locator;
   readonly subscriptionSuccessMessageLocator: Locator;
+  readonly scrollUpArrowLocator: Locator;
+  readonly fullFledgedTextLocator: Locator;
 
 
 
@@ -87,6 +89,8 @@ export class HomePage extends BasePage {
     this.subscriptionEmailLocator = page.locator("#susbscribe_email");
     this.subscribeButtonLocator = page.locator("#subscribe");
     this.subscriptionSuccessMessageLocator = page.locator("//div[@class='alert-success alert']");
+    this.scrollUpArrowLocator = page.locator("#scrollUp");
+    this.fullFledgedTextLocator = page.getByText("Full-Fledged practice website for Automation Engineers").first();
 
 
   }
@@ -258,6 +262,7 @@ export class HomePage extends BasePage {
   */
   async scrollToBottom(): Promise<void> {
     await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
   }
 
 
@@ -292,6 +297,28 @@ export class HomePage extends BasePage {
     await expect(this.subscriptionSuccessMessageLocator, "Subscription success message is not displayed.").
       toHaveText("You have been successfully subscribed!");
   }
+
+/*
+ * Summary : Clicks the Scroll Up arrow.
+ * Author  : Stimna
+ */
+async clickScrollUpArrow(): Promise<void> {
+
+    await expect(this.scrollUpArrowLocator).toBeVisible();
+    await this.click(this.scrollUpArrowLocator);
+   }
+
+/*
+ * Summary : Verifies that the page is scrolled to the top.
+ * Author  : Stimna
+ */
+async verifyScrolledToTop(): Promise<void> {
+
+    await expect(this.fullFledgedTextLocator).toBeVisible();
+    const scrollPosition = await this.page.evaluate(() => window.scrollY);
+    expect(scrollPosition).toBeLessThanOrEqual(5);
+}
+
 
 
 
