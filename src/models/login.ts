@@ -22,3 +22,8 @@ export type TestData={
     mobile:string
 
 }
+
+export type invalidLogin = {
+    email: string,
+    password: string
+};
