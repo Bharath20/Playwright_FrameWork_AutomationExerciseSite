@@ -98,14 +98,14 @@ export class HomePage extends BasePage {
     await this.click(this.loginBtnLocator);
   }
   /*Summary: This method clicks on the "Contact Us" button to navigate to the Contact Us page.
-     * Author       : Abhishek
-     */
+  * Author       : Abhishek
+  */
   async clickContactUs(): Promise<void> {
     await this.click(this.contactUsButtonLocator);
   }
   /*Summary: This method verifies that the home page is visible.
-    * Author       : Abhishek
-    */
+  * Author       : Abhishek
+  */
   async verifyHomePageVisible(): Promise<void> {
     await WaitUtils.waitForVisible(this.homePageVisibleLocator);
     await expect(this.homePageVisibleLocator).toBeVisible();
@@ -119,23 +119,23 @@ export class HomePage extends BasePage {
   }
 
   /*
-      * Summary: * This method is used to verify home page is loaded.
-      *  Author       : Stimna 
+  * Summary: * This method is used to verify home page is loaded.
+  *  Author       : Stimna 
   */
   async verifyHomePageLoaded() {
     await expect(this.page).toHaveTitle("Automation Exercise");
   }
-   /*
-      * Summary: * This method is used to Click on the Products tab
-      *  Author       : Stimna 
+  /*
+  * Summary: * This method is used to Click on the Products tab
+  *  Author       : Stimna 
   */
   async clickProducts() {
     await this.click(this.productsButtonLocator);
   }
   
   /* Summary: * This method is used to click on the testcase button.
-   * Author       : Dixy Salin
-   */
+  * Author       : Dixy Salin
+  */
   async VerifyclickTestcaseButton() {
     await this.click(this.clickTestcaseButton);
   }
@@ -196,23 +196,23 @@ export class HomePage extends BasePage {
   }
 
   /* 
-   * Summary: * This method is used Delete the account of the user
-   * Author       : Sooraj 
-   */
+  * Summary: * This method is used Delete the account of the user
+  * Author       : Sooraj 
+  */
   async deleteAccount() {
     await this.click(this.deleteButtonLocator);
   }
   
   /* Summary: * This method is used to click on the Logout button.
-   * Author       : Dixy Salin
-   */
+  * Author       : Dixy Salin
+  */
   async ClickLogoutButton() {
     await this.click(this.homePageLogoutLocator);
   }
 
   /* Summary: * This method is used to returns to the Home page.
-   * Author       : Dixy Salin
-   */
+  * Author       : Dixy Salin
+  */
   async VerifyUserReturnsToHompage() {
     await expect(this.page).toHaveURL('https://automationexercise.com/login');
     console.log(await this.page.url());
