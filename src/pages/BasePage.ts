@@ -6,6 +6,10 @@ export class BasePage {
     constructor(public page: Page) { }
 
 
+  /*
+  * Summary: * This method is used to handle advertisement.
+  * Author       : Sooraj 
+  */
     // Common Advertisement Handling
     async closeAdvertisementIfPresent(): Promise<void> {
 
@@ -28,8 +32,11 @@ export class BasePage {
         }
     }
 
-
-    // Click on an element
+    /* 
+    *Summary:  This method is used to perform click actions with wait.
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async click(locator: Locator): Promise<void> {
         
         await this.closeAdvertisementIfPresent();
@@ -38,7 +45,11 @@ export class BasePage {
     }
 
 
-    // Enter text into a textbox
+    /* 
+    *Summary:  This method is used to perform fill actions with wait.
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async fill(locator: Locator, value: string): Promise<void> {
 
         await this.closeAdvertisementIfPresent();
@@ -46,8 +57,11 @@ export class BasePage {
         await locator.fill(value);
     }
 
-
-    // Get text from an element
+    /* 
+    *Summary:  This method is used to Get text from an element.
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async getText(locator: Locator): Promise<string | null> {
 
         await this.closeAdvertisementIfPresent();
@@ -66,14 +80,25 @@ export class BasePage {
 
     // }
 
+    
+    /* 
+    *Summary:  This method is used to verify text attribute of a locator
+    * @param locator - locator of the element.
+    * @param expectedText - expected text to be verifie.
+    * @param message - assertion message.
+    * Author       : Sooraj 
+    */
     async verifyText(locator: Locator,expectedText: string, message?: string): Promise<void> {
 
      await this.closeAdvertisementIfPresent();
      await expect(locator,message).toContainText(expectedText);
    }
 
-
-    // Check whether an element is visible
+    /* 
+    *Summary:  This method is used to Check whether an element is visible
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async isVisible(locator: Locator): Promise<boolean> {
 
         await this.closeAdvertisementIfPresent();
@@ -81,8 +106,11 @@ export class BasePage {
         return await locator.isVisible();
     }
 
-
-    // Wait for an element to be visible
+    /* 
+    *Summary:  This method is used to Wait for an element to be visible
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async waitForElement(locator: Locator): Promise<void> {
 
         await this.closeAdvertisementIfPresent();
@@ -92,16 +120,22 @@ export class BasePage {
         });
     }
 
-
-    // Navigate to URL
+    /* 
+    *Summary:  This method is used to Navigate to URL
+    * @param url - url of the page to be navigated.
+    * Author       : Sooraj 
+    */
     async navigateTo(url: string): Promise<void> {
 
         await this.page.goto(url);
 
     }
 
-
-    // Scroll to an element
+    /* 
+    *Summary:  This method is used to Scroll to an element
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async scrollIntoView(locator: Locator): Promise<void> {
 
         await this.closeAdvertisementIfPresent();
@@ -110,8 +144,11 @@ export class BasePage {
 
     }
 
-
-    // Hover over an element
+    /* 
+    *Summary:  This method is used to Hover over an element
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async hover(locator: Locator): Promise<void> {
 
         await this.closeAdvertisementIfPresent();
@@ -120,8 +157,11 @@ export class BasePage {
 
     }
 
-
-    // Select dropdown option
+    /* 
+    *Summary:  This method is used to Select dropdown option
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async selectDropdownOption(locator: Locator, value: string): Promise<void> {
 
         await this.closeAdvertisementIfPresent();
@@ -130,8 +170,11 @@ export class BasePage {
 
     }
 
-
-    // Check checkbox
+    /* 
+    *Summary:  This method is used to  Check checkbox
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async check(locator: Locator): Promise<void> {
 
         await this.closeAdvertisementIfPresent();
@@ -140,8 +183,11 @@ export class BasePage {
 
     }
 
-
-    // Uncheck checkbox
+    /* 
+    *Summary:  This method is used to  UnCheck checkbox
+    * @param locator - locator of the element.
+    * Author       : Sooraj 
+    */
     async uncheck(locator: Locator): Promise<void> {
 
         await this.closeAdvertisementIfPresent();
@@ -150,8 +196,14 @@ export class BasePage {
 
     }
     
+    /* 
+    *Summary:  This method is used to verify visibility of a locator
+    * @param locator - locator of the element.
+    * @param errorMessage - error message to verify.
+    * Author       : Sooraj 
+    */
     async verifyVisible(locator: Locator, errorMessage: string) {
     await expect(locator, errorMessage).toBeVisible();
-}
+    }
 
 }

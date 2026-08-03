@@ -146,7 +146,6 @@ export class HomePage extends BasePage {
    * Author       : Sooraj 
    */
   async signUp(name: string, email: string) {
-    await WaitUtils.waitForVisible(this.signUpOrLoginButtonLocator);
     await this.click(this.signUpOrLoginButtonLocator);
     await this.fill(this.signUpNameInputLocator, name);
     await this.fill(this.signUpEmailInputLocator, email);
