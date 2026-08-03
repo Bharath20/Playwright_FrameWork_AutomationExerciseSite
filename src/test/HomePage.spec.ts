@@ -31,6 +31,15 @@ test("TC10_Verify Subscription in home page", async ({ page }) => {
 
 });
 
+/*
+
+Test Case ID : TC25
+Test Summary : Verify Scroll Up using Arrow button and Scroll Down functionality.
+Module : Home Page
+Author : Stimna Antony
+
+*/
+
 test("TC25_Verify Scroll Up using Arrow button", async ({ page }) => {
 
     const homePage = new HomePage(page);
