@@ -1,10 +1,8 @@
-import { expect, Locator, Page } from "@playwright/test";
+﻿import { expect, Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { WaitUtils } from "../utils/WaitUtils";
 
-
 export class HomePage extends BasePage {
-
   readonly signUpOrLoginButtonLocator: Locator;
   readonly contactUsButtonLocator: Locator;
   readonly emailAddressInputLocator: Locator;
@@ -37,11 +35,13 @@ export class HomePage extends BasePage {
   readonly signUpContinueBtnLocator: Locator;
   readonly deleteButtonLocator: Locator;
   readonly logoutButtonLocator: Locator;
+  readonly homePageLogoutLocator: Locator;
+  readonly LabelBacktoLoginlocator: Locator;
 
 
   constructor(page: Page) {
     super(page);
-    this.signUpOrLoginButtonLocator = page.getByText("Signup / Login")
+    this.signUpOrLoginButtonLocator = page.getByText("Signup / Login");
     this.contactUsButtonLocator = page.locator("a[href='/contact_us'], a:has-text('Contact Us'), a:has-text('Contact us')");
     this.emailAddressInputLocator = page.locator("//input[@data-qa='login-email']");
     this.passwordInputLocator = page.locator("//input[@data-qa='login-password']");
@@ -49,7 +49,7 @@ export class HomePage extends BasePage {
     this.adCloseButtonLocator = page.getByText("Close");
     this.loggedInUserLocator = page.locator("//a[contains(.,'Logged in as')]");
     this.productsButtonLocator = page.locator("a[href='/products']");
-    this.clickTestcaseButton = page.locator("(//button[text()='Test Cases'])[1]");
+    this.clickTestcaseButton = page.locator("//a[contains(text(),' Test Cases')]");
     this.homePageVisibleLocator = page.locator("//img[@alt='Website for automation practice']");
     this.signUpNameInputLocator = page.locator("//input[@data-qa='signup-name']");
     this.signUpEmailInputLocator = page.locator("//input[@data-qa='signup-email']");
@@ -72,8 +72,11 @@ export class HomePage extends BasePage {
     this.signUpCreateBtnLocator = page.locator("//button[@data-qa='create-account']");
     this.signUpContinueBtnLocator = page.locator("//a[@data-qa='continue-button']");
     this.deleteButtonLocator = page.getByText(" Delete Account");
-    this.logoutButtonLocator = page.getByText(" Logout")
+    this.logoutButtonLocator = page.getByText(" Logout");
+    this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
+    this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
 
+    
   }
 
   async navigate() {
@@ -84,13 +87,10 @@ export class HomePage extends BasePage {
   }
 
   async closeAdvertisement() {
-
     await this.closeAdvertisementIfPresent();
-
   }
 
   async login(email: string, password: string) {
-
     await WaitUtils.waitForVisible(this.signUpOrLoginButtonLocator);
     await this.click(this.signUpOrLoginButtonLocator);
     await this.fill(this.emailAddressInputLocator, email);
@@ -112,12 +112,10 @@ export class HomePage extends BasePage {
   }
 
   async verifyLoggedInUser(expectedUsername: string) {
-
     await this.verifyText(this.loggedInUserLocator, " Logged in as " + expectedUsername,
       "Logged in username is not displayed correctly"
     );
     console.log(" Logged in as " + expectedUsername);
-
   }
 
   /*
@@ -125,7 +123,6 @@ export class HomePage extends BasePage {
       *  Author       : Stimna 
   */
   async verifyHomePageLoaded() {
-
     await expect(this.page).toHaveTitle("Automation Exercise");
   }
    /*
@@ -135,33 +132,34 @@ export class HomePage extends BasePage {
   async clickProducts() {
     await this.click(this.productsButtonLocator);
   }
-
+  
+  /* Summary: * This method is used to click on the testcase button.
+   * Author       : Dixy Salin
+   */
   async VerifyclickTestcaseButton() {
     await this.click(this.clickTestcaseButton);
-
   }
 
   /* Summary: * This method is used to sign Up.
-  * @param name - name of the user.
-  * @param email - email of the user. 
-  * Author       : Sooraj 
-  */
+   * @param name - name of the user.
+   * @param email - email of the user. 
+   * Author       : Sooraj 
+   */
   async signUp(name: string, email: string) {
     await this.click(this.signUpOrLoginButtonLocator);
     await this.fill(this.signUpNameInputLocator, name);
     await this.fill(this.signUpEmailInputLocator, email);
     await this.click(this.signUpBtnLocator);
-
   }
 
-  /* 
-  * Summary: * This method is used for filling account information.
-  * @param password - password of the user.
-  * @param dayValue - dayValue of the user. 
-  * @param monthValue - monthValue of the user.
-  * @param yearValue - yearValue of the user.
-  * Author       : Sooraj 
-  */
+   /* 
+   * Summary: * This method is used for filling account information.
+   * @param password - password of the user.
+   * @param dayValue - dayValue of the user. 
+   * @param monthValue - monthValue of the user.
+   * @param yearValue - yearValue of the user.
+   * Author       : Sooraj 
+   */
   async accountInformationCreation(password: string, dayValue: string, monthValue: string, yearValue: string) {
     await this.click(this.mrRadioBtnLocator);
     await this.fill(this.signUpPasswordInputLocator, password);
@@ -198,13 +196,27 @@ export class HomePage extends BasePage {
   }
 
   /* 
-  * Summary: * This method is used Delete the account of the user
-  * Author       : Sooraj 
-  */
+   * Summary: * This method is used Delete the account of the user
+   * Author       : Sooraj 
+   */
   async deleteAccount() {
     await this.click(this.deleteButtonLocator);
-
+  }
+  
+  /* Summary: * This method is used to click on the Logout button.
+   * Author       : Dixy Salin
+   */
+  async ClickLogoutButton() {
+    await this.click(this.homePageLogoutLocator);
   }
 
-
+  /* Summary: * This method is used to returns to the Home page.
+   * Author       : Dixy Salin
+   */
+  async VerifyUserReturnsToHompage() {
+    await expect(this.page).toHaveURL('https://automationexercise.com/login');
+    console.log(await this.page.url());
+    await this.verifyText(this.LabelBacktoLoginlocator, "Login to your account",
+      "User is successfully returns to login page");
+  }
 }

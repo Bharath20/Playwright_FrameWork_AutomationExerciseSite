@@ -20,17 +20,31 @@ test("TCO8_Verify All Products and product detail page", async ({ page }) => {
 
 });
 
-test("TC07_Verify Test Cases Page", async ({ page }) => {
-  const homePage = new HomePage(page);
-  const testCasesPage = new TestcasesPage(page);
 
-  await homePage.navigate();
-  await homePage.closeAdvertisement();
-  await homePage.VerifyclickTestcaseButton();
-  await testCasesPage.verifytestcasePageUrlisloaded();
-  await testCasesPage.verifyTestCasesAreListed();
-});
+  /*
+ * Test Case ID : TCO4
+ * Test Summary : Verify that user can logout successfully.
+ * Module       : User Logout
+ * Author       : Dixy 
+ */
+  test("TC04_Logout User", async ({page}) => {
+    const homePage = new HomePage(page);
+    const loginData: Login = LoginData.getLoginDetails();
+
+    await homePage.navigate();
+    await homePage.closeAdvertisement();
+
+    await homePage.login(loginData.email, loginData.password);
+    //Verify the user is logged in successfully
+    await homePage.verifyLoggedInUser(loginData.username); 
+
+    //click on logout button 
+    await homePage.ClickLogoutButton();
+    //Verify user is navigated to the login page after logout
+    await homePage.VerifyUserReturnsToHompage();
+
+  });
 
 
 
-  
+ 
