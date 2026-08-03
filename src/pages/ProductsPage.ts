@@ -10,6 +10,12 @@ export class ProductsPage extends BasePage {
     readonly searchButtonLocator: Locator;
     readonly searchedProductsLocator: Locator;
     readonly productNamesLocator: Locator;
+    readonly writeYourReviewLocator:Locator;
+    readonly writeYourReviewNameLocator:Locator;
+    readonly writeYourReviewEmailLocator:Locator;
+    readonly writeYourReviewMessageLocator:Locator;
+    readonly writeYourReviewSubmitButtonLocator:Locator;
+    readonly writeYourReviewSuccessMessageLocator:Locator;
 
     constructor(page: Page) {
         super(page);
@@ -21,6 +27,20 @@ export class ProductsPage extends BasePage {
         this.searchButtonLocator = page.locator("//button[@id='submit_search']");
         this.searchedProductsLocator = page.locator("//h2[text()='Searched Products']");
         this.productNamesLocator = page.locator("//div[@class='productinfo text-center']/p[1]");
+        this.writeYourReviewLocator = page.locator("//a[@href='#reviews']");
+
+        this.writeYourReviewNameLocator = page.locator("#name");
+        this.writeYourReviewEmailLocator = page.locator("#email");
+        this.writeYourReviewMessageLocator = page.locator("#review");
+        this.writeYourReviewSubmitButtonLocator = page.locator("#button-review");
+        this.writeYourReviewSuccessMessageLocator=page.locator("//div[@id='review-section']/div/div/span");
+
+}
+    
+    viewProductWithProductName(productName: string): Locator {
+        return this.page.locator(
+            `//p[text()='${productName}']/parent::*/parent::*/parent::*//a[contains(@href,'/product_details')]`
+        );
     }
 
     /*
@@ -72,5 +92,19 @@ export class ProductsPage extends BasePage {
         expect(count, "No products related to the searched product are displayed.").toBeGreaterThan(0);
 
     }
+
+    /*
+    * Summary :Method to add review
+    * Author  : Sooraj
+    */
+    async addReview(name:string,email:string,message:string){
+        await this.fill(this.writeYourReviewNameLocator,name);
+        await this.fill(this.writeYourReviewEmailLocator,email);
+        await this.fill(this.writeYourReviewMessageLocator,message);
+        await this.click(this.writeYourReviewSubmitButtonLocator);
+    }
+
+
+
 
 }
