@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
+import { invalidLogin, Login } from "../models/login";
+import { LoginData } from "../data/loginData";
 
 /*
  * Test Case ID : TCO3
@@ -9,11 +11,12 @@ import { HomePage } from "../pages/HomePage";
  */
   test("TCO3_Login with Invalid Credentials", async ({page}) => {
     const homePage = new HomePage(page);
-
+    const invalidLoginData: invalidLogin = LoginData.TC03_getInvalidLoginDetails();
+    
     await homePage.navigate();
     await homePage.closeAdvertisement();
-    await expect(page, "Home Page is not displayed").toHaveTitle('Automation Exercise');
-    await homePage.login("invalid@example.com", "invalidpassword");
+    await homePage.verifyHomePageVisible();
+    await homePage.login(invalidLoginData.email, invalidLoginData.password);
     await homePage.emailOrPasswordIncorrect();
 
   });
