@@ -118,7 +118,6 @@ test("TCO2_Login User with correct email and password", async ({ page }) => {
 test("TCO3_Login with Invalid Credentials", async ({ page }) => {
   const homePage = new HomePage(page);
   const invalidLoginData: invalidLogin = LoginData.TC03_getInvalidLoginDetails();
-
   await homePage.navigate();
   await homePage.closeAdvertisement();
   await homePage.verifyHomePageVisible();
@@ -126,7 +125,6 @@ test("TCO3_Login with Invalid Credentials", async ({ page }) => {
   await homePage.emailOrPasswordIncorrect();
 
 });
-
   /*
  * Test Case ID : TCO5
  * Test Summary : Register User with existing email.
@@ -138,10 +136,8 @@ test("TCO5_Register User with existing email", async ({ page }) => {
   const testData: TestData = LoginData.TC01_getTestDataForSignUp();
   const homePage = new HomePage(page);
   const basePage = new BasePage(page);
-
-   await homePage.navigate();
+  await homePage.navigate();
   await homePage.closeAdvertisement();
-
   await homePage.signUp(testData.name, testData.email);
   await homePage.verifyEmailAlreadyExistsError();
 });
