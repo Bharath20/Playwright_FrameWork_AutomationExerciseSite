@@ -59,9 +59,10 @@ export class LoginData {
             email: "invalid@example.com",
             password: "invalidpassword"
         };
+    }
 
 
-         public static TC16_getTestDataForUserCreation():TestData{
+    public static TC16_getTestDataForUserCreation():TestData{
 
         return {
             name:"TC16 TestUser",
@@ -79,7 +80,7 @@ export class LoginData {
             zipcode:"695032",
             mobile:"123456214"
 
-        }
+        };
     }
 
 }
