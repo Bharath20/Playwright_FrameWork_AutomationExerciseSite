@@ -46,6 +46,8 @@ export class HomePage extends BasePage {
   readonly fullFledgedTextLocator: Locator;
 
 
+  readonly homePageSubscribeHeadingLocator: Locator;
+  readonly homePageFullyFledgedHeadingLocator: Locator;
 
 
   constructor(page: Page) {
@@ -93,6 +95,8 @@ export class HomePage extends BasePage {
     this.fullFledgedTextLocator = page.getByText("Full-Fledged practice website for Automation Engineers").first();
 
 
+    this.homePageSubscribeHeadingLocator = page.locator("//div[@class='single-widget']//h2");
+    this.homePageFullyFledgedHeadingLocator = page.locator("//h2[contains(text(),'Full-Fledged practice website for Automation Engineers')]");
   }
 
   async navigate() {

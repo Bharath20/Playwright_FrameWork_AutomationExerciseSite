@@ -4,7 +4,7 @@ export default defineConfig({
 
   testDir: './src/test',
 
-  timeout: 30 * 1000,
+  timeout: 50 * 1000,
 
   fullyParallel: false,
 

@@ -16,6 +16,8 @@ export class ProductsPage extends BasePage {
     readonly writeYourReviewMessageLocator:Locator;
     readonly writeYourReviewSubmitButtonLocator:Locator;
     readonly writeYourReviewSuccessMessageLocator:Locator;
+    readonly addToCartButtonLocator:Locator;
+    readonly continueShoppingButtonLocator:Locator;
 
     constructor(page: Page) {
         super(page);
@@ -34,6 +36,8 @@ export class ProductsPage extends BasePage {
         this.writeYourReviewMessageLocator = page.locator("#review");
         this.writeYourReviewSubmitButtonLocator = page.locator("#button-review");
         this.writeYourReviewSuccessMessageLocator=page.locator("//div[@id='review-section']/div/div/span");
+        this.addToCartButtonLocator=page.locator("//button[@class='btn btn-default cart']");
+        this.continueShoppingButtonLocator=page.locator("//button[@class='btn btn-success close-modal btn-block']");
 
 }
     
