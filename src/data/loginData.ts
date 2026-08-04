@@ -53,4 +53,26 @@ export class LoginData {
         }
     }
 
+
+         public static TC16_getTestDataForUserCreation():TestData{
+
+        return {
+            name:"TC16 TestUser",
+            email:"tc16emailtest@gmail.com",
+            password:"Password@121212",
+            dayValue:"2",
+            monthValue:"March",
+            yearValue:"2010",
+            firstName:"Testfirstname",
+            lastName:"ln",
+            address:"test address",
+            countryValue:"India",
+            state:"Kerala",
+            city:"TVM",
+            zipcode:"695032",
+            mobile:"123456214"
+
+        }
+    }
+
 }

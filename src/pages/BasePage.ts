@@ -206,4 +206,25 @@ export class BasePage {
     await expect(locator, errorMessage).toBeVisible();
     }
 
+
+    /* 
+    *Summary:  This method is used to scroll to top.
+    * Author       : Sooraj 
+    */
+    async scrollToTop() {
+    await this.page.evaluate(() => window.scrollTo(0, 0));
+
+    }
+
+        /* 
+    *Summary:  This method is used to scroll to bottom.
+    * Author       : Sooraj 
+    */
+    async scrollToBottom() {
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+
+    }
+    
+
 }

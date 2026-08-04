@@ -37,6 +37,8 @@ export class HomePage extends BasePage {
   readonly logoutButtonLocator: Locator;
   readonly homePageLogoutLocator: Locator;
   readonly LabelBacktoLoginlocator: Locator;
+  readonly homePageSubscribeHeadingLocator: Locator;
+  readonly homePageFullyFledgedHeadingLocator: Locator;
 
 
   constructor(page: Page) {
@@ -76,7 +78,8 @@ export class HomePage extends BasePage {
     this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
     this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
 
-    
+    this.homePageSubscribeHeadingLocator = page.locator("//div[@class='single-widget']//h2");
+    this.homePageFullyFledgedHeadingLocator = page.locator("//h2[contains(text(),'Full-Fledged practice website for Automation Engineers')]");
   }
 
   async navigate() {
