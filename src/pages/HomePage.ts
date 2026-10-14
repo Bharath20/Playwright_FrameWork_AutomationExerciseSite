@@ -35,19 +35,7 @@ export class HomePage extends BasePage {
   readonly signUpContinueBtnLocator: Locator;
   readonly deleteButtonLocator: Locator;
   readonly logoutButtonLocator: Locator;
-  readonly homePageLogoutLocator: Locator;
-  readonly LabelBacktoLoginlocator: Locator;
-  readonly emailAlreadyExistsError: Locator;
-  readonly subscriptionTitleLocator: Locator;
-  readonly subscriptionEmailLocator: Locator;
-  readonly subscribeButtonLocator: Locator;
-  readonly subscriptionSuccessMessageLocator: Locator;
-  readonly scrollUpArrowLocator: Locator;
-  readonly fullFledgedTextLocator: Locator;
 
-
-  readonly homePageSubscribeHeadingLocator: Locator;
-  readonly homePageFullyFledgedHeadingLocator: Locator;
 
 
   constructor(page: Page) {
@@ -84,24 +72,12 @@ export class HomePage extends BasePage {
     this.signUpContinueBtnLocator = page.locator("//a[@data-qa='continue-button']");
     this.deleteButtonLocator = page.getByText(" Delete Account");
     this.logoutButtonLocator = page.getByText(" Logout");
-    this.homePageLogoutLocator = page.locator("//a[contains(text(), 'Logout')]");
-    this.LabelBacktoLoginlocator = page.locator("//h2[text()='Login to your account']");
-    this.emailAlreadyExistsError = page.locator("//p[text()='Email Address already exist!']");
-    this.subscriptionTitleLocator = page.locator("//h2[text()='Subscription']");
-    this.subscriptionEmailLocator = page.locator("#susbscribe_email");
-    this.subscribeButtonLocator = page.locator("#subscribe");
-    this.subscriptionSuccessMessageLocator = page.locator("//div[@class='alert-success alert']");
-    this.scrollUpArrowLocator = page.locator("#scrollUp");
-    this.fullFledgedTextLocator = page.getByText("Full-Fledged practice website for Automation Engineers").first();
 
-
-    this.homePageSubscribeHeadingLocator = page.locator("//div[@class='single-widget']//h2");
-    this.homePageFullyFledgedHeadingLocator = page.locator("//h2[contains(text(),'Full-Fledged practice website for Automation Engineers')]");
-  }
+   }
 
   async navigate() {
     console.log("Navigating...");
-    await this.page.goto("https://automationexercise.com/");
+    this.navigateTo("https://automationexercise.com/");
     await expect(this.page).toHaveURL('https://automationexercise.com/');
     console.log(await this.page.url());
   }
@@ -222,111 +198,5 @@ export class HomePage extends BasePage {
   async deleteAccount() {
     await this.click(this.deleteButtonLocator);
   }
-
-  /* Summary: * This method is used to click on the Logout button.
-  * Author       : Dixy Salin
-  */
-  async ClickLogoutButton() {
-    await this.click(this.homePageLogoutLocator);
-  }
-
-  /* Summary: * This method is used to returns to the Home page.
-  * Author       : Dixy Salin
-  */
-  async VerifyUserReturnsToHompage() {
-    await expect(this.page).toHaveURL('https://automationexercise.com/login');
-    console.log(await this.page.url());
-    await this.verifyText(this.LabelBacktoLoginlocator, "Login to your account",
-      "User is successfully returns to login page");
-  }
-
-  /* 
-    * Summary: * This method is used to verify the error message when user tries to login with incorrect email and password.
-    * @param email - email of the user.
-    * @param password - password of the user.
-    * Author       : Abhishek 
-    */
-
-  async emailOrPasswordIncorrect() {
-    await expect(
-      this.page.getByText('Your email or password is incorrect!')
-    ).toBeVisible();
-
-  }
-
-  async verifyEmailAlreadyExistsError(): Promise<void> {
-    await expect(this.emailAlreadyExistsError).toBeVisible();
-
-    await expect(this.emailAlreadyExistsError).toHaveText('Email Address already exist!');
-}
-
-  /*
-  * Summary:* Scrolls to the bottom of the Home page.
-  * Author       : Stimna
-  */
-  async scrollToBottom(): Promise<void> {
-    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-
-  }
-
-
-  /*
- * Summary:* Verifies the Subscription section is visible.
- * Author       : Stimna
- */
-  async verifySubscriptionSection(): Promise<void> {
-    await expect(this.subscriptionTitleLocator, "'SUBSCRIPTION' section is not visible in the Home Page").toBeVisible();
-  }
-
-  /**
- * Summary:* Enters the email address in the subscription field.
- * @param email : Email address to subscribe.
- * Author       : Stimna
- */
-  async enterSubscriptionEmail(email: string): Promise<void> {
-    await this.fill(this.subscriptionEmailLocator, email);
-  }
-/**
-   *Summary:* Clicks the Subscribe button.
-   * Author       : Stimna
-   */
-  async clickSubscribe(): Promise<void> {
-    await this.click(this.subscribeButtonLocator);
-  }
-  /**
-   * Summary:*Verifies the successful subscription message.
-   * Author       : Stimna
-   */
-  async verifySubscriptionSuccessMessage(): Promise<void> {
-    await expect(this.subscriptionSuccessMessageLocator, "Subscription success message is not displayed.").
-      toHaveText("You have been successfully subscribed!");
-  }
-
-/*
- * Summary : Clicks the Scroll Up arrow.
- * Author  : Stimna
- */
-async clickScrollUpArrow(): Promise<void> {
-
-    await expect(this.scrollUpArrowLocator).toBeVisible();
-    await this.click(this.scrollUpArrowLocator);
-   }
-
-/*
- * Summary : Verifies that the page is scrolled to the top.
- * Author  : Stimna
- */
-async verifyScrolledToTop(): Promise<void> {
-
-    await expect(this.fullFledgedTextLocator).toBeVisible();
-    const scrollPosition = await this.page.evaluate(() => window.scrollY);
-    expect(scrollPosition).toBeLessThanOrEqual(5);
-}
-
-
-
-
-
-
 
 }
