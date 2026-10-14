@@ -53,7 +53,7 @@ test("TCO1_Register User", async ({ page }) => {
   await homePage.deleteAccount();
 
   //18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-  await expect(page.locator('h2').first(), "Account Deleted! message not displayed").toHaveText('Account Deleted!');
+  await expect(page.locator('h2').first(), "Account Deleted! message not displayed  ").toHaveText('Account Deleted!');
 
   //15. Click 'Continue' button
   await basePage.click(homePage.signUpContinueBtnLocator);
