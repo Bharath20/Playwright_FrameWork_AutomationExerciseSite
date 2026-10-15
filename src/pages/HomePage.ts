@@ -16,25 +16,7 @@ export class HomePage extends BasePage {
   readonly signUpNameInputLocator: Locator;
   readonly signUpEmailInputLocator: Locator;
   readonly signUpBtnLocator: Locator;
-  readonly mrRadioBtnLocator: Locator;
-  readonly signUpPasswordInputLocator: Locator;
-  readonly signUpFirstNameInputLocator: Locator;
-  readonly signUpLastNameInputLocator: Locator;
-  readonly daySelectLocator: Locator;
-  readonly monthSelectLocator: Locator;
-  readonly yearSelectLocator: Locator;
-  readonly newsLetterCheckSelectLocator: Locator;
-  readonly receiveOffersCheckSelectLocator: Locator;
-  readonly signUpAddressInputLocator: Locator;
-  readonly countrySelectLocator: Locator;
-  readonly signUpStateInputLocator: Locator;
-  readonly signUpCityInputLocator: Locator;
-  readonly signUpZipcodeInputLocator: Locator;
-  readonly signUpMobileNumberInputLocator: Locator;
-  readonly signUpCreateBtnLocator: Locator;
-  readonly signUpContinueBtnLocator: Locator;
-  readonly deleteButtonLocator: Locator;
-  readonly logoutButtonLocator: Locator;
+
 
 
 
