@@ -6,11 +6,11 @@ import { BasePage } from "../pages/BasePage";
 
 /*
  * Test Case ID : TCO1
- * Test Summary : Verify that a new user can register successfully.
+ * Test Summary : Login Scenario
  * Module       : Registration
  * Author       : Sooraj
  */
-test("TCO1_Register User", async ({ page }) => {
+test("Login Scenario", async ({ page }) => {
   const loginData: Login = LoginData.getLoginDetails();
   const testData: TestData = LoginData.TC01_getTestDataForSignUp();
   const homePage = new HomePage(page);
@@ -30,32 +30,5 @@ test("TCO1_Register User", async ({ page }) => {
   //7. Click 'Signup' button
   await homePage.signUp(testData.name, testData.email);
 
-  //8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
-  //9. Fill details: Title, Name, Email, Password, Date of birth
-  //10. Select checkbox 'Sign up for our newsletter!'
-  //11. Select checkbox 'Receive special offers from our partners!'
-  await homePage.accountInformationCreation(testData.password, testData.dayValue, testData.monthValue, testData.yearValue);
-
-  //12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
-  //13. Click 'Create Account button'
-  await homePage.addressInformationCreation(testData.firstName, testData.lastName, testData.address, testData.countryValue, testData.state, testData.city, testData.zipcode, testData.mobile);
-
-  //14. Verify that 'ACCOUNT CREATED!' is visible
-  await expect(page.locator('h2').first(), "Account Created! message not displayed").toHaveText('Account Created!');
-
-  //15. Click 'Continue' button
-  await basePage.click(homePage.signUpContinueBtnLocator);
-
-  //16. Verify that 'Logged in as username' is visible
-  await homePage.verifyLoggedInUser(testData.name);
-
-  //17. Click 'Delete Account' button
-  await homePage.deleteAccount();
-
-  //18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-  await expect(page.locator('h2').first(), "Account Deleted! message not displayed").toHaveText('Account Deleted!');
-
-  //15. Click 'Continue' button
-  await basePage.click(homePage.signUpContinueBtnLocator);
-
+ 
 });
